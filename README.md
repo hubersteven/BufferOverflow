@@ -42,7 +42,7 @@
 
 <h2 align="center">Instrucciones detalladas de instalación y ejecución</h2>
 <p>
-  Link del archivo: <a     href="https://github.com/hubersteven/BufferOverflow/blob/main/2.%20Entrega%20final/Instalaci%C3%B3n%20de%20dependencias.pdf"> Instalacion de dependencias</a> <br>
+  Link del archivo: <a     href="https://github.com/hubersteven/BufferOverflow/blob/main/Documentos/2.%20Entrega%20final/Instalaci%C3%B3n%20de%20dependencias.pdf"> Instalacion de dependencias</a> <br>
   Link del video: <a href="https://youtu.be/wMtP92HEb90"> video Entrega Final</a>
 </p>
 
