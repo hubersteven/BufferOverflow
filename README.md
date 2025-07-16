@@ -86,8 +86,8 @@ A pesar de que el Buffer Overflow es un concepto de software, para realizar su  
 
 <h2 align="center">Instrucciones detalladas de instalación y ejecución</h2>
 <p>
-  Link del archivo: <a    href="https://github.com/hubersteven/BufferOverflow/blob/main/Documentos/2.%20Entrega%20final/Instalaci%C3%B3n%20de%20dependencias.pdf"> Instalacion de dependencias</a> <br>
-  Link del video: <a href="https://youtu.be/wMtP92HEb90"> video Entrega Final</a>
+  En el siguiente link, se encuentra una guia paso a paso de de la instalacion y ejecucion de este laboratorio: <a    href="https://github.com/hubersteven/BufferOverflow/blob/main/Documentos/2.%20Entrega%20final/Instalaci%C3%B3n%20de%20dependencias.pdf"> Instalacion de dependencias</a> <br>
+  Ademas de eso, se puede un video explicativo del laboratorio, por medio del siguiente link: <a href="https://youtu.be/wMtP92HEb90"> video Entrega Final</a>
 </p>
 
 <h2 align="center">Ejemplos de uso</h2>
