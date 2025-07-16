@@ -30,7 +30,47 @@
 <h2 align="center">Descripción del proyecto y su propósito</h2>
 
 <p>
-  
+  <strong>Drescripcion del proyecto:</strong> <br>
+  <br>
+  El desbordamiento de buffer pasa cuando un programa escribe más datos de los que puede almacenar en un área de la memoria (buffer), ocasionando que se sobreescriban otras partes de la memoria adyacente. Para explicar mejor esto, es como si se estuviera metiendo más ropa de la que cabe en una maleta y al final, algunas cosas van a terminar fuera de lugar. Eso es lo que sucede con el desbordamiento de buffer. Esto, ocasiona que se generen errores o incluso ataques maliciosos, los cuales pueden ocasionar algún fallo en el sistema o escalar los privilegios, otorgando al atacante control no autorizado sobre el sistema comprometido.
+A pesar de que hoy en día existen diferentes medidas de protección incorporadas en los sistemas operativos modernos, todavía existen varios sistemas que siguen siendo vulnerables, debido al código heredado que no fue diseñado con las estrictas prácticas de seguridad actuales, o a implementaciones mal gestionadas de la memoria en aplicaciones nuevas. La naturaleza de lenguajes de bajo nivel como C y C++, que permiten un manejo manual y directo de memoria, si bien ofrecen un gran control y eficiencia, también introduce un mayor riesgo de errores si no se implementan validaciones de entrada y límites de buffer adecuados.
+
+Por ende comprender esta problemática es fundamental para desarrollar software más robusto y para defender los sistemas informáticos en un entorno digital cada vez más complejo y amenazante.
+
+Por otra parte, el buffer overflow ha sido responsable de diferentes ataques informáticos, los cuales han sido muy perjudiciales para el tema de la informática. Un ejemplo de esto fue el gusano Morris en el año de 1998, el cual aprovechó el desbordamiento de buffer para poder propagarse y causar interrupciones masivas en la red. Este problema, lo podemos encontrar en diferentes lenguajes como C y C++, debido a que en dichos lenguajes el manejo de la memoria es manual y no existen los controles automáticos de límite. La figura 1 muestra un ejemplo de un buffer overflow en un arreglo (array) <br>
+
+<p align="center">
+  <img width="394" height="175" alt="Captura de pantalla 2025-07-16 021235" src="https://github.com/user-attachments/assets/cd99d2c4-1c97-40d7-9ca6-cadf1cfca90a" />
+</p>
+Para esta vulnerabilidad, existen varios tipos de ataques como el stack overflow. Esto  sucede cuando se escribe más información en la pila de la que fue reservada, ocasionando que se sobreescriba la dirección de retorno almacenada por funciones. Permitiendo que el programa pueda ser engañado, para que se redirija hacia un código malicioso, como un shellcode inyectado en el mismo buffer. 
+El heap-based overflow, se produce cuando un programa escribe más datos en una región del heap, es decir, en la memoria dinámica, la cual es asignada por diferentes funciones como malloc(), lo cual puede corromper las estructuras de control, modificar los punteros y permitir la ejecución de código arbitrario. 
+También encontramos el  string format vulnerability, el cual, ocurre cuando una función de formateo como el printf(), utiliza de una manera directa una entrada del usuario como cadena de formato. Ocasionando, que se afecte la integridad del programa, ya que esto, permite que se pueda leer o escribir en las direcciones de memorias arbitrarias.:
+Para que estos ataques funcionen, es necesario entender cómo está organizada la memoria del sistema, principalmente en las arquitecturas como x86. Donde los registros EIP (Instruction Pointer) , el cual se encarga de controlar la ejecución de las instrucciones y ESP (Stack Pointer) que se encarga del acceso a la pila. Por lo cual, un atacante que sepa cómo funcionan dichos registros puede redirigir el flujo del programa mediante técnicas como Sleds de NOP, que son instrucciones que no hacen nada, usadas como alfombra para poder aterrizar de una forma segura en el shellcode. Offsets calculados para ubicar exactamente dónde escribir  y la sobreescritura de direcciones de retorno que es cuando se escribe más allá del final de un buffer. 
+A pesar de que se han realizado grandes avances en la protección para poder evitar estos ataque, como la aleatorización del espacio de direcciones (ASLR), que es una técnica de seguridad en la cual, se aleatoriza las direcciones de la memoria, evitando que un atacante no sepa hacia dónde redirigir la ejecución, ya que las direcciones cambian cada vez que se ejecuta el programa. La prevención de la ejecución de los datos (DEP/NX bit), la cual, impide la ejecución de código áreas de la memoria, donde solo deberían contener solo datos. También está los canarios en pila (stack canaries), los cuales permiten detectar y prevenir los ataques de stack buffer overflow antes de que se pueda sobreescribir la dirección de retorno de una función. Todavía hay muchísimas aplicaciones modernas que aún contienen código vulnerable o que ejecutan bibliotecas inseguras. 
+En la tabla 1, se puede ver una comparativo entre los ataques mencionados anteriormente y las mitigaciones típicas: <br>
+<br>
+
+<p align="center">
+<img width="640" height="216" alt="Captura de pantalla 2025-07-16 022740" src="https://github.com/user-attachments/assets/c10d6ee3-b749-4f7b-a561-ab03020d076c" />
+</p>
+
+De acuerdo a lo visto en el curso de sistemas operativos, este proyecto se enfoca en comprender cómo las vulnerabilidades de memoria pueden ser aprovechadas para comprometer la seguridad de un sistema.
+La gestión de procesos, la asignación de memoria, la ejecución de instrucciones y la protección de memoria son conceptos fundamentales, que son aplicables a la comprensión y explotación de los Buffer Overflow. Además, se analizaran las contramedidas implementadas por los sistemas operativos, como la aleatorización de espacio de direcciones (ASLR) y la protección de no ejecución (NX/DEP) para mitigar los ataque de desbordamiento de buffer.
+
+  <strong>Drescripcion del proyecto:</strong> <br>
+  <ul>
+    <li><strong>Objetivo principal:</strong><br>
+      Realizar un ataque de desbordamiento de buffer en un entorno controlado, para poder entender su funcionamiento y cómo prevenirlo</li>
+    <li><strong>Objetivos específicos:</strong><br>
+      <ul>
+        <li>Investigar todo lo relacionado con los fundamentos teoricos y tecnicos del buffer overflow</li>
+        <li>Simular el ataque en un entorno controlado utilizando algunas herramientas como kali Linux e Immunity Debugger.</li>
+        <li>Identificar las direcciones de memoria y los offsets que puedan ser relevantes para el ataque</li>
+        <li>Crear un código malicioso para poder inyectar y ejecutar el ataque</li>
+        <li>Analizar y explorar diferentes soluciones para poder mitigar el riesgo de los desbordamientos de buffer, y evaluar su efectividad frente a los ataques simulados.</li>
+      <ul>
+    </ul>  
+A traves del siguiente enlace, se encuentra la informacion del proyecto mas detallada <a href="https://github.com/hubersteven/BufferOverflow/blob/main/Documentos/2.%20Entrega%20final/Reporte%20tecnico.pdf"> Reporte técnico</a>
 </p>
 
 <h2 align="center">Requisitos de hardware/software</h2>
