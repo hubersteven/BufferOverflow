@@ -68,10 +68,12 @@ La gestión de procesos, la asignación de memoria, la ejecución de instruccion
         <li>Identificar las direcciones de memoria y los offsets que puedan ser relevantes para el ataque</li>
         <li>Crear un código malicioso para poder inyectar y ejecutar el ataque</li>
         <li>Analizar y explorar diferentes soluciones para poder mitigar el riesgo de los desbordamientos de buffer, y evaluar su efectividad frente a los ataques simulados.</li>
-      <ul>
-    </ul>  
+      </ul>
+    </ul>
+</ul> 
 A traves del siguiente enlace, se encuentra la informacion del proyecto mas detallada <a href="https://github.com/hubersteven/BufferOverflow/blob/main/Documentos/2.%20Entrega%20final/Reporte%20tecnico.pdf"> Reporte técnico</a>
 </p>
+
 
 <h2 align="center">Requisitos de hardware/software</h2>
 
