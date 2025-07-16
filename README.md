@@ -1,31 +1,5 @@
 
 <h1 align="center">BufferOverflow</h1>
-<p align="center">
-  <b>Integrantes</b>
-</p>
-
-<p align="center">
-  Huber Steven Arroyave Rojas <br>
-  Assandry Enrique Barón Rodríguez
-</p>
-
-<p align="center">
-  <b>Tutor:</b>
-</p>
-
-<p align="center">
-  Henry Alberto Arcila Ramírez <br>
-  Danny Álexandro Múnera Ramírez
-<br>
- </p>
-
- <p align="center">
-  Sistemas Operativos <br>
-  Departamento de Ingeniería de Sistemas <br>
-  Facultad de Ingeniería <br>
-  Universidad de Antioquia <br>
-  2025
-</p>
 
 <h2 align="center">Descripción del proyecto y su propósito</h2>
 
@@ -210,6 +184,29 @@ A pesar de que el Buffer Overflow es un concepto de software, para realizar su  
 
 <h2 align="center">Créditos de autores</h2>
 
-<p>
-  
+<p align="center">
+  <b>Integrantes</b>
+</p>
+
+<p align="center">
+  Huber Steven Arroyave Rojas <br>
+  Assandry Enrique Barón Rodríguez
+</p>
+
+<p align="center">
+  <b>Tutor:</b>
+</p>
+
+<p align="center">
+  Henry Alberto Arcila Ramírez <br>
+  Danny Álexandro Múnera Ramírez
+<br>
+ </p>
+
+ <p align="center">
+  Sistemas Operativos <br>
+  Departamento de Ingeniería de Sistemas <br>
+  Facultad de Ingeniería <br>
+  Universidad de Antioquia <br>
+  2025
 </p>
